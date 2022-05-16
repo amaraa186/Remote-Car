@@ -29,22 +29,13 @@ const Controller = () => {
         left()
     }
 
-    const handleMove = () => {
-        console.log()
-    }
-
-    const handleStop = () => {
-        console.log()
-    }
-
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{flex: 1, paddingLeft: 100, backgroundColor: 'blue'}}>
 
             </View>
             <View style={{ alignItems: 'flex-end', flex: 1, justifyContent: 'space-between' }}>
-                {() => <Joystick size={100} move={handleMove} stop={handleStop} />}
-                {/* <View style={{ padding: 10, flexDirection: 'row' }}>
+                <View style={{ padding: 10, flexDirection: 'row' }}>
                     <TouchableHighlight onLongPress={() => onForward()} onPressOut={() => onCancel()}>
                         <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
                     </TouchableHighlight>
@@ -61,7 +52,7 @@ const Controller = () => {
                     <TouchableHighlight onLongPress={() => onLeft()} onPressOut={() => onCancel()}>
                         <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
                     </TouchableHighlight>
-                </View> */}
+                </View>
             </View>
         </View>
     )
