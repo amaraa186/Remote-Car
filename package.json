@@ -15,8 +15,13 @@
     "react-joystick-component": "^4.0.1",
     "react-native": "0.68.0",
     "react-native-gesture-handler": "^2.3.2",
+<<<<<<< HEAD
     "react-native-safe-area-context": "^4.2.4",
     "react-native-video-player": "^0.12.0"
+=======
+    "react-native-localhost": "^1.0.0",
+    "react-native-safe-area-context": "^4.2.4"
+>>>>>>> e3e4477ab8fd0f638992ed87a3931f51b74378b6
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
