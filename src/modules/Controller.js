@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
+<<<<<<< HEAD
     TouchableHighlight, 
     Text
   } from 'react-native';
+=======
+    TouchableHighlight,
+    StyleSheet,
+    Modal
+} from 'react-native';
+>>>>>>> d4a255c220002d27181c8c255e816cedfe884da0
 import { forward, back, right, left, stop } from './ControllerApi'
 
 const Controller = () => {
+    const [modalShow, setModalShow] = useState(true)
+
+    useEffect(() => {
+
+    }, [])
 
     const onForward = () => {
         forward()
@@ -29,32 +41,57 @@ const Controller = () => {
     }
 
     return (
-        <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 1, paddingLeft: 100, backgroundColor: 'blue'}}>
-                <Text>${localhost}</Text>
+        <View style={styles.container}>
+            <View style={styles.rightButtons}>
+                <TouchableHighlight onLongPress={onForward} onPressOut={onCancel}>
+                    <View style={styles.button} />
+                </TouchableHighlight>
+                <View style={{ width: 10 }} />
+                <TouchableHighlight onLongPress={onBack} onPressOut={onCancel}>
+                    <View style={styles.button} />
+                </TouchableHighlight>
             </View>
-            <View style={{ alignItems: 'flex-end', flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ padding: 10, flexDirection: 'row' }}>
-                    <TouchableHighlight onLongPress={() => onForward()} onPress={() => onForward()} onPressOut={() => onCancel()}>
-                        <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
-                    </TouchableHighlight>
-                    <View style={{ width: 10 }} />
-                    <TouchableHighlight onLongPress={() => onBack()} onPress={() => onBack()} onPressOut={() => onCancel()}>
-                        <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
-                    </TouchableHighlight>
-                </View>
-                <View style={{ padding: 10, flex: 1, maxHeight: 150, justifyContent: 'space-between' }}>
-                    <TouchableHighlight onLongPress={() => onRight()} onPress={() => onRight()} onPressOut={() => onCancel()}>
-                        <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
-                    </TouchableHighlight>
-
-                    <TouchableHighlight onLongPress={() => onLeft()} onPress={() => onLeft()} onPressOut={() => onCancel()}>
-                        <View style={{backgroundColor: 'blue', height: 60, width: 60}} />
-                    </TouchableHighlight>
-                </View>
+            <View style={styles.leftButtons}>
+                <TouchableHighlight onLongPress={onRight} onPressOut={onCancel}>
+                    <View style={styles.button} />
+                </TouchableHighlight>
+                <TouchableHighlight onLongPress={onLeft} onPressOut={onCancel}>
+                    <View style={styles.button} />
+                </TouchableHighlight>
             </View>
+            <Modal
+                visible={modalShow}
+                onRequestClose={() => setModalShow(!modalShow)}
+            >
+                <View>
+                    
+                </View>
+            </Modal>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'flex-end', 
+        justifyContent: 'space-between'
+    },
+    button: {
+        backgroundColor: 'blue',
+        height: 80,
+        width: 80
+    },
+    rightButtons: {
+        padding: 10, 
+        flexDirection: 'row'
+    },
+    leftButtons: {
+        padding: 10, 
+        flex: 1, 
+        maxHeight: 190, 
+        justifyContent: 'space-between'
+    }
+})
 
 export default Controller
