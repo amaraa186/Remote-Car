@@ -1,18 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import Controller from './src/modules/Controller';
 import 'react-native-gesture-handler';
+import { IPAddress } from './context/IPContext'
 
 const App = () => {
   return (
-    <Controller />
+    <IPAddress>
+      <Controller />
+    </IPAddress>
   )
 };
 
