@@ -4,7 +4,6 @@ import {
     TouchableHighlight, 
     Text
   } from 'react-native';
-import localhost from 'react-native-localhost';
 import { forward, back, right, left, stop } from './ControllerApi'
 
 const Controller = () => {
