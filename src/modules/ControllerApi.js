@@ -2,22 +2,22 @@ import {
     request
 } from '../../utils/api'
 
-export async function forward() {
-    return await request().get('/forward')
+export async function forward(ip) {
+    return await request(ip).get('/forward')
 }
 
-export async function back() {
-    return await request().get(`/back`)
+export async function back(ip) {
+    return await request(ip).get(`/back`)
 }
 
-export async function right() {
-    return await request().get(`/right`)
+export async function right(ip) {
+    return await request(ip).get(`/right`)
 }
 
-export async function left() {
-    return await request().get(`/left`)
+export async function left(ip) {
+    return await request(ip).get(`/left`)
 }
 
-export async function stop() {
-    return await request().get(`/stop`)
+export async function stop(ip) {
+    return await request(ip).get(`/stop`)
 }

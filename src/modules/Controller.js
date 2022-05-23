@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Text
 } from 'react-native';
-import { forward, back, right, left, stop } from './ControllerApi'
+import { forward, back, right, left, stop } from './ControllerApi';
 import IPContext from '../../context/IPContext';
 
 const Controller = () => {
@@ -20,27 +20,49 @@ const Controller = () => {
     useEffect(() => {
         if(state.ipaddress == null){
             setModalShow(true)
+        } else {
+            setValue(state.ipaddress)
         }
     }, [])
 
     const onForward = () => {
-        forward()
+        if(state.ipaddress != null && state.ipaddress != ''){
+            forward(value)
+        } else {
+            alert("IP хаягаа оруулна уу")
+        }
     }
     
     const onBack = () => {
-        back()
+        if(state.ipaddress != null && state.ipaddress != ''){
+            back(value)
+        } else {
+            alert("IP хаягаа оруулна уу")
+        }
     }
     
     const onCancel = () => {
-        stop()
+        if(state.ipaddress != null && state.ipaddress != ''){
+            stop(value)
+        } else {
+            alert("IP хаягаа оруулна уу")
+        }
     }
     
     const onRight = () => {
-        right()
+        if(state.ipaddress != null && state.ipaddress != ''){
+            right(value)
+        } else {
+            alert("IP хаягаа оруулна уу")
+        }
     }
     
     const onLeft = () => {
-        left()
+        if(state.ipaddress != null && state.ipaddress != ''){
+            left(value)
+        } else {
+            alert("IP хаягаа оруулна уу")
+        }
     }
 
     const onChange = () => {
