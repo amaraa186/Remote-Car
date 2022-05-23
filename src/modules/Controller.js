@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
     View,
-<<<<<<< HEAD
-    TouchableHighlight, 
-    Text
-  } from 'react-native';
-=======
     TouchableHighlight,
     StyleSheet,
-    Modal
+    Modal,
+    TextInput, 
+    TouchableOpacity,
+    Text
 } from 'react-native';
->>>>>>> d4a255c220002d27181c8c255e816cedfe884da0
 import { forward, back, right, left, stop } from './ControllerApi'
+import IPContext from '../../context/IPContext';
 
 const Controller = () => {
-    const [modalShow, setModalShow] = useState(true)
+    const [modalShow, setModalShow] = useState(false)
+    const [value, setValue] = useState()
+
+    const state = useContext(IPContext)
 
     useEffect(() => {
-
+        if(state.ipaddress == null){
+            setModalShow(true)
+        }
     }, [])
 
     const onForward = () => {
@@ -40,16 +43,32 @@ const Controller = () => {
         left()
     }
 
+    const onChange = () => {
+        setModalShow(false)
+        state.getIpaddress(value)
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.rightButtons}>
-                <TouchableHighlight onLongPress={onForward} onPressOut={onCancel}>
-                    <View style={styles.button} />
-                </TouchableHighlight>
-                <View style={{ width: 10 }} />
-                <TouchableHighlight onLongPress={onBack} onPressOut={onCancel}>
-                    <View style={styles.button} />
-                </TouchableHighlight>
+            <View style={{flexDirection: 'row'}}>
+                <View style={{marginEnd: 170, marginTop: 10}}>
+                    <TouchableOpacity onPress={() => setModalShow(true)}>
+                        <View style={styles.dots}>
+                            <View style={styles.dot}/>
+                            <View style={styles.dot}/>
+                            <View style={styles.dot}/>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.rightButtons}>
+                    <TouchableHighlight onLongPress={onForward} onPressOut={onCancel}>
+                        <View style={styles.button} />
+                    </TouchableHighlight>
+                    <View style={{ width: 10 }} />
+                    <TouchableHighlight onLongPress={onBack} onPressOut={onCancel}>
+                        <View style={styles.button} />
+                    </TouchableHighlight>
+                </View>
             </View>
             <View style={styles.leftButtons}>
                 <TouchableHighlight onLongPress={onRight} onPressOut={onCancel}>
@@ -63,8 +82,28 @@ const Controller = () => {
                 visible={modalShow}
                 onRequestClose={() => setModalShow(!modalShow)}
             >
-                <View>
-                    
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalView}>
+                        <View style={{paddingStart: 125}}>
+                            <TouchableOpacity onPress={() => setModalShow(false)}>
+                                <Text style={{fontWeight: 'bold'}}>X</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TextInput 
+                            value={value}
+                            onChangeText={setValue}
+                            placeholder='IP хаягаа оруулна уу'
+                            keyboardType="numeric" 
+                        />
+                        <TouchableOpacity onPress={onChange}>
+                            <View style={{
+                                padding: 10,
+                                backgroundColor: 'red'
+                            }}>
+                                <Text style={{textAlign: 'center', color: 'white'}}>Өөрчлөх</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View> 
                 </View>
             </Modal>
         </View>
@@ -75,6 +114,36 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'flex-end', 
+        justifyContent: 'space-between'
+    },
+    modalContainer: {
+        flex: 1, 
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },  
+    dot: {
+        backgroundColor: 'black', 
+        width: 10,
+        height: 10
+    },
+    dots: {
+        flexDirection: 'row', 
+        width: 40, 
         justifyContent: 'space-between'
     },
     button: {
