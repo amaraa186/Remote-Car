@@ -9,24 +9,13 @@ import {
     Text
 } from 'react-native';
 import { forward, back, right, left, stop } from './ControllerApi';
-import IPContext from '../../context/IPContext';
 
 const Controller = () => {
     const [modalShow, setModalShow] = useState(false)
     const [value, setValue] = useState()
 
-    const state = useContext(IPContext)
-
-    useEffect(() => {
-        if(state.ipaddress == null){
-            setModalShow(true)
-        } else {
-            setValue(state.ipaddress)
-        }
-    }, [])
-
     const onForward = () => {
-        if(state.ipaddress != null && state.ipaddress != ''){
+        if(value != null && value != ''){
             forward(value)
         } else {
             alert("IP хаягаа оруулна уу")
@@ -34,7 +23,7 @@ const Controller = () => {
     }
     
     const onBack = () => {
-        if(state.ipaddress != null && state.ipaddress != ''){
+        if(value != null && value != ''){
             back(value)
         } else {
             alert("IP хаягаа оруулна уу")
@@ -42,7 +31,7 @@ const Controller = () => {
     }
     
     const onCancel = () => {
-        if(state.ipaddress != null && state.ipaddress != ''){
+        if(value != null && value != ''){
             stop(value)
         } else {
             alert("IP хаягаа оруулна уу")
@@ -50,7 +39,7 @@ const Controller = () => {
     }
     
     const onRight = () => {
-        if(state.ipaddress != null && state.ipaddress != ''){
+        if(value != null && value != ''){
             right(value)
         } else {
             alert("IP хаягаа оруулна уу")
@@ -58,7 +47,7 @@ const Controller = () => {
     }
     
     const onLeft = () => {
-        if(state.ipaddress != null && state.ipaddress != ''){
+        if(value != null && value != ''){
             left(value)
         } else {
             alert("IP хаягаа оруулна уу")
@@ -67,7 +56,6 @@ const Controller = () => {
 
     const onChange = () => {
         setModalShow(false)
-        state.getIpaddress(value)
     }
 
     return (
